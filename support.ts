@@ -1,5 +1,5 @@
 // @ts-ignore
-import { sparqlEscapeUri, sparqlEscape } from "mu";
+import { sparqlEscapeUri, sparqlEscape, sparqlEscapeBool } from "mu";
 import { LDES_FOLDER, LDES_FRAGMENTER } from "./environment";
 import { Changeset, Quad, Term } from "./types";
 import { addData, getConfigFromEnv } from "@lblod/ldes-producer";
@@ -21,6 +21,13 @@ const sparqlEscapeObject = (bindingObject: Term): string => {
     // sparqlEscape formats it slightly differently and then the comparison breaks in healing
     const safeValue = `${bindingObject.value}`;
     return `"${safeValue.split('"').join("")}"^^xsd:dateTime`;
+  }
+  if (bindingObject.datatype === "http://www.w3.org/2001/XMLSchema#boolean") {
+    const value =
+      bindingObject.value === true ||
+      bindingObject.value === 1 ||
+      bindingObject.value?.toLowerCase() === "true";
+    return sparqlEscapeBool(value);
   }
   return bindingObject.type === "uri"
     ? sparqlEscapeUri(bindingObject.value)
