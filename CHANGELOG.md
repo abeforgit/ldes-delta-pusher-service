@@ -1,5 +1,14 @@
 
 
+
+## 1.2.9 (2025-09-23)
+
+#### :bug: Bug Fix
+* [#32](https://github.com/redpencilio/ldes-delta-pusher-service/pull/32) Correctly treat boolean values when they come from sparql as string ([@lagartoverde](https://github.com/lagartoverde))
+
+#### Committers: 1
+- Oscar Rodriguez Villalobos ([@lagartoverde](https://github.com/lagartoverde))
+
 ## 1.2.5 (2025-04-01)
 
 #### :bug: Bug Fix
